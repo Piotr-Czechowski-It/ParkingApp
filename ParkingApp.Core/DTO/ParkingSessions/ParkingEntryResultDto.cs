@@ -1,4 +1,4 @@
-﻿using ParkingApp.Core.DTOs.Vehicles;
+using ParkingApp.Core.DTOs.Vehicles;
 
 namespace ParkingApp.Core.DTOs.ParkingSessions;
 

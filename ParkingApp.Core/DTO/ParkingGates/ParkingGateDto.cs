@@ -1,4 +1,4 @@
-﻿namespace ParkingApp.Core.DTO.ParkingGates;
+namespace ParkingApp.Core.DTOs.ParkingGates;
 
 public record ParkingGateDto(
     Guid Id,
