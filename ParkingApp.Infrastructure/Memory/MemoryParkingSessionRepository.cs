@@ -1,9 +1,9 @@
-﻿using ParkingApp.Core.Entities;
+using ParkingApp.Core.Entities;
 using ParkingApp.Core.Interfaces;
 
 namespace ParkingApp.Infrastructure.Memory;
 
-public class ParkingSessionRepository : GenericRepositoryAsync<ParkingSession>, IParkingSessionRepository
+public class MemoryParkingSessionRepository : GenericRepositoryAsync<ParkingSession>, IParkingSessionRepository
 {
     public Task<IEnumerable<ParkingSession>> FindByLicensePlateAsync(string licensePlate)
     {
