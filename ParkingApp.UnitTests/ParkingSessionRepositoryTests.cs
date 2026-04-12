@@ -7,7 +7,7 @@ namespace ParkingApp.UnitTests.Repositories;
 
 public class ParkingSessionRepositoryTests
 {
-    private readonly IParkingSessionRepository _repo = new ParkingSessionRepository();
+    private readonly IParkingSessionRepository _repo = new MemoryParkingSessionRepository();
 
     [Fact]
     public async Task FindByLicensePlateAsync_ShouldReturnSessionsForMatchingVehicle()

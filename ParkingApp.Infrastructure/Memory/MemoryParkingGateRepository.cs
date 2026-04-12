@@ -27,6 +27,8 @@ public class MemoryParkingGateRepository : GenericRepositoryAsync<ParkingGate>, 
             IsOperational = true
         };
         _data.Add(gate2.Id, gate2);
+
+      
     }
 
     public Task<ParkingGate?> FindByNameAsync(string name)

@@ -10,7 +10,7 @@ public class GenericRepositoryTests
 
     public GenericRepositoryTests()
     {
-        _repo = new GenericRepositoryAsync<Vehicle>();
+        _repo = new MemoryVehicleRepository();
     }
 
     private static Vehicle CreateVehicle(string licensePlate, string brand = "Audi", string color = "Black")

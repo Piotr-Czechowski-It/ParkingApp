@@ -6,7 +6,7 @@ namespace ParkingApp.UnitTests.Repositories;
 
 public class VehicleRepositoryTests
 {
-    private readonly IVehicleRepository _repo = new VehicleRepository();
+    private readonly IVehicleRepository _repo = new MemoryVehicleRepository();
 
     [Fact]
     public async Task FindByLicensePlateAsync_ShouldReturnVehicle_WhenLicensePlateExists()

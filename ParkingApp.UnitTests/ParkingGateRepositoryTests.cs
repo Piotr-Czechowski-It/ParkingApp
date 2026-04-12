@@ -7,7 +7,7 @@ namespace ParkingApp.UnitTests.Repositories;
 
 public class ParkingGateRepositoryTests
 {
-    private readonly IParkingGateRepository _repo = new ParkingGateRepository();
+    private readonly IParkingGateRepository _repo = new MemoryParkingGateRepository();
 
     [Fact]
     public async Task FindByNameAsync_ShouldReturnGate_WhenNameExists()
