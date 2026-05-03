@@ -13,4 +13,31 @@ public class GatesController(IParkingGateService service) : ControllerBase
     {
         return Ok(await service.GetAllAsync(page, size));
     }
+
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetGate(Guid id)
+    {
+        var gate = await service.GetByIdAsync(id);
+        if (gate is null)
+            return NotFound();
+
+        return Ok(gate);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateGate([FromBody] CreateGateDto dto)
+    {
+        var created = await service.CreateAsync(dto);
+        return CreatedAtAction(nameof(GetGate), new { id = created.Id }, created);
+    }
+
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> UpdateGate(Guid id, [FromBody] UpdateGateDto dto)
+    {
+        var updated = await service.UpdateAsync(id, dto);
+        if (updated is null)
+            return NotFound();
+
+        return Ok(updated);
+    }
 }
