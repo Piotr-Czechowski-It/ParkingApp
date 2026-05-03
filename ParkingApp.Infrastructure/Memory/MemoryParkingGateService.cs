@@ -1,6 +1,7 @@
 using ParkingApp.Core.Common;
 using ParkingApp.Core.DTOs.ParkingGates;
 using ParkingApp.Core.Entities;
+using ParkingApp.Core.Enums;
 using ParkingApp.Core.Interfaces;
 using ParkingApp.Core.Interfaces.Services;
 
@@ -33,6 +34,19 @@ public class MemoryParkingGateService(IParkingUnitOfWork unit) : IParkingGateSer
         var added = await unit.Gates.AddAsync(entity);
         await unit.SaveChangesAsync();
         return ToDto(added);
+    }
+
+    public async Task<ParkingGateDto?> UpdateAsync(Guid id, UpdateGateDto dto)
+    {
+        var entity = await unit.Gates.FindByIdAsync(id);
+        if (entity is null)
+            return null;
+
+        entity.Name = dto.Name;
+        entity.Type = Enum.Parse<GateType>(dto.Type, ignoreCase: true);
+        var updated = await unit.Gates.UpdateAsync(entity);
+        await unit.SaveChangesAsync();
+        return ToDto(updated);
     }
 
     public async Task<ParkingGateDto> SetOperationalStatusAsync(Guid id, bool isOperational)

@@ -1,0 +1,76 @@
+@HostAddress = http://localhost:5217
+
+### Pobierz wszystkie bramki
+GET {{HostAddress}}/api/gates?page=1&size=10
+Accept: application/json
+
+###
+
+### Pobierz bramkę po id (istniejąca)
+GET {{HostAddress}}/api/gates/a647a4d3-8c7b-486a-b8f4-61a0fa76be80
+Accept: application/json
+
+###
+
+### Pobierz bramkę po id (nieistniejąca) - oczekiwany 404
+GET {{HostAddress}}/api/gates/00000000-0000-0000-0000-000000000000
+Accept: application/json
+
+###
+
+### Utwórz nową bramkę - poprawne dane
+POST {{HostAddress}}/api/gates
+Content-Type: application/json
+
+{
+  "name": "Bramka Boczna",
+  "location": "Poziom Dolny",
+  "type": "EntryExit"
+}
+
+###
+
+### Utwórz bramkę - błędna walidacja (za długa nazwa, niedozwolony typ) - oczekiwany 400
+POST {{HostAddress}}/api/gates
+Content-Type: application/json
+
+{
+  "name": "Ta nazwa jest zdecydowanie za dluga",
+  "location": "Poziom 2",
+  "type": "Nieznany"
+}
+
+###
+
+### Edytuj bramkę - poprawne dane - oczekiwany 200
+PUT {{HostAddress}}/api/gates/7e652514-78d1-4fac-80cc-4a30147b640a
+Content-Type: application/json
+
+{
+  "name": "Bramka Glowna",
+  "type": "EntryExit"
+}
+
+###
+
+### Edytuj bramkę - nieistniejące id - oczekiwany 404
+PUT {{HostAddress}}/api/gates/00000000-0000-0000-0000-000000000000
+Content-Type: application/json
+
+{
+  "name": "Bramka Glowna",
+  "type": "Entry"
+}
+
+###
+
+### Edytuj bramkę - błędna walidacja - oczekiwany 400
+PUT {{HostAddress}}/api/gates/9124e1f8-eeb3-493c-85dd-6a5901ee9b51
+Content-Type: application/json
+
+{
+  "name": "",
+  "type": "ZlyTyp"
+}
+
+###

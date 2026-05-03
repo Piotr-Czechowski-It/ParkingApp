@@ -1,3 +1,4 @@
+using ParkingApp.Core;
 using ParkingApp.Core.Interfaces;
 using ParkingApp.Core.Interfaces.Services;
 using ParkingApp.Infrastructure.Memory;
@@ -5,9 +6,9 @@ using ParkingApp.Infrastructure.Memory;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddCoreServices();
 
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddSwaggerGen();
+builder.Services.AddOpenApi();
 
 // Repozytoria
 builder.Services.AddSingleton<IVehicleRepository, MemoryVehicleRepository>();
@@ -24,14 +25,9 @@ builder.Services.AddSingleton<IParkingGateService, MemoryParkingGateService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    // https://localhost:7019/swagger
-    // http://localhost:5216/swagger
-
+    app.MapOpenApi();
 }
 
 app.UseHttpsRedirection();
